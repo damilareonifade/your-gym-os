@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Branding;
 use Closure;
 use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentColor;
@@ -11,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ConfigureAdminPanelMiddleware
 {
+
+    protected ?Branding $brand = null;
     /**
      * Handle an incoming request.
      *
