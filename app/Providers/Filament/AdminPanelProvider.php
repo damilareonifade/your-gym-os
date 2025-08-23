@@ -20,6 +20,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
+use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,9 +30,9 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('/')
+            ->path('/admin')
             ->login()
-            ->registration()
+            // ->registration()
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
@@ -59,6 +61,12 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->middleware([
+                    // "universal",
+                InitializeTenancyByDomain::class,
+                PreventAccessFromCentralDomains::class,
+                // ConfigureTenantPanelMiddleware::class,
+            ], isPersistent: true)
             ->multiFactorAuthentication([
                 AppAuthentication::make()
                     ->recoverable()
@@ -67,11 +75,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->middleware(
-                [
-                    ConfigureAdminPanelMiddleware::class,
-                ]
-            );
+            ]);
+        // ->middleware(
+        //     [
+        //         ConfigureAdminPanelMiddleware::class,
+        //     ]
+        // );
     }
 }

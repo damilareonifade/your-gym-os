@@ -3,32 +3,27 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Auth\PasswordValidationRules;
-use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class User extends Resource
+class Tenant extends Resource
 {
-    use PasswordValidationRules;
-
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\User>
+     * @var class-string<\App\Models\Tenant>
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\Tenant::class;
 
-    public static $group = 'Administration';
+    public static $group = 'Tenancy';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -37,41 +32,55 @@ class User extends Resource
      */
     public static $search = [
         'id',
-        'name',
-        'email',
     ];
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @return array<int, \Laravel\Nova\Fields\Field|\Laravel\Nova\Panel|\Laravel\Nova\ResourceTool|\Illuminate\Http\Resources\MergeValue>
+     * @return array<int, \Laravel\Nova\Fields\Field>
      */
     public function fields(NovaRequest $request): array
     {
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
+            Fields\Gravatar::make(),
 
-            Text::make('Name')
+            Fields\Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Email')
+            Fields\Text::make('Username')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+                ->rules('required', 'max:254')
+                ->creationRules('unique:tenants,username'),
 
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules($this->passwordRules())
-                ->updateRules($this->optionalPasswordRules()),
+            Fields\Email::make('Email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254'),
+
+            Fields\Number::make('Phone Number')->hideFromIndex(),
+
+            Fields\Text::make('Code')
+                ->sortable()
+                ->rules('max:254'),
+
+            Fields\Select::make('Status')
+                ->sortable()
+                ->options(static::$model::$statusType)->displayUsingLabels(),
+
+            Fields\Code::make('data')
+                ->json()
+                ->rules('nullable', 'json')
+                ->hideFromIndex(),
+
+            // BelongsToMany::make('providers', 'providers', \App\Nova\Providers::class),
+
         ];
     }
 
     /**
-     * Get the cards available for the request.
+     * Get the cards available for the resource.
      *
      * @return array<int, \Laravel\Nova\Card>
      */

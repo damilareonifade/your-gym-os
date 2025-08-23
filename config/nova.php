@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'path' => '/nova',
+    'path' => '/sysadmin',
 
     /*
     |--------------------------------------------------------------------------
@@ -103,6 +103,7 @@ return [
         // \Laravel\Nova\Http\Middleware\AuthenticateSession::class,
         // \Laravel\Nova\Http\Middleware\EnsureEmailIsVerified::class,
         \Laravel\Nova\Http\Middleware\Authorize::class,
+        // \App\Http\Middleware\Require2FAMiddleware::class
     ],
 
     'asset_middleware' => [
@@ -147,7 +148,9 @@ return [
     |
     */
 
-    'currency' => 'USD',
+    'currency' => 'NGN',
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -161,15 +164,15 @@ return [
     |
     */
 
-    // 'brand' => [
-    //     'logo' => resource_path('/img/example-logo.svg'),
+    'brand' => [
+        'logo' => resource_path('/img/logo.svg'),
 
-    //     'colors' => [
-    //         "400" => "24, 182, 155, 0.5",
-    //         "500" => "24, 182, 155",
-    //         "600" => "24, 182, 155, 0.75",
-    //     ]
-    // ],
+        //         'colors' => [
+//             "400" => "47, 0, 255, 0.5",   // 50% opacity (lighter/transparent)
+//             "500" => "47, 0, 255",        // Base color (solid)
+//             "600" => "47, 0, 255, 0.75",  // 75% opacity (slightly deeper tone)
+//         ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
