@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Model implements FilamentUser, HasAvatar, HasName
+class Admin extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword, HasName
 {
 
-    use HasUlids;
+    use HasUlids, Notifiable;
+    use HasRoles;
     protected $guarded = ['id'];
 
     protected $hidden = [
@@ -28,7 +33,7 @@ class Admin extends Model implements FilamentUser, HasAvatar, HasName
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
+        return true;
     }
 
     public function getFilamentName(): string

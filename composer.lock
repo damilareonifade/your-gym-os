@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "196cd849ee5b69797ded0b5c86f895d5",
+    "content-hash": "b7e04b15563602829ea2f2ec3844f2b1",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3913,6 +3913,75 @@
             "time": "2025-07-17T05:12:15+00:00"
         },
         {
+            "name": "lucasdotvin/laravel-soulbscription",
+            "version": "4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lucasdotvin/laravel-soulbscription.git",
+                "reference": "55c47f7b7ff547582ed598a9a06fe45eefd6ebbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lucasdotvin/laravel-soulbscription/zipball/55c47f7b7ff547582ed598a9a06fe45eefd6ebbd",
+                "reference": "55c47f7b7ff547582ed598a9a06fe45eefd6ebbd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0|^8.1|^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.22|^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.5|^10.0|^11.5.3",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": [],
+                    "providers": [
+                        "LucasDotVin\\Soulbscription\\SoulbscriptionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LucasDotVin\\Soulbscription\\": "src",
+                    "LucasDotVin\\Soulbscription\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucas Vinicius",
+                    "email": "lucasvinicius211@yahoo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A straightforward interface to handle subscriptions and features consumption.",
+            "homepage": "https://github.com/lucasdotvin/laravel-soulbscription",
+            "keywords": [
+                "laravel",
+                "laravel-soulbscription",
+                "lucasdotvin",
+                "subscriptions"
+            ],
+            "support": {
+                "issues": "https://github.com/lucasdotvin/laravel-soulbscription/issues",
+                "source": "https://github.com/lucasdotvin/laravel-soulbscription/tree/4.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lucasdotvin",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-24T23:23:02+00:00"
+        },
+        {
             "name": "masterminds/html5",
             "version": "2.10.0",
             "source": {
@@ -5999,6 +6068,89 @@
                 }
             ],
             "time": "2025-07-17T15:46:43+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "6.21.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "6a118e8855dfffcd90403aab77bbf35a03db51b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/6a118e8855dfffcd90403aab77bbf35a03db51b3",
+                "reference": "6a118e8855dfffcd90403aab77bbf35a03db51b3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^8.12|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/container": "^8.12|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^8.12|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/database": "^8.12|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/passport": "^11.0|^12.0",
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.4|^10.1|^11.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "6.x-dev",
+                    "dev-master": "6.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 8.0 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-permission/issues",
+                "source": "https://github.com/spatie/laravel-permission/tree/6.21.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-23T16:08:05+00:00"
         },
         {
             "name": "spatie/shiki-php",

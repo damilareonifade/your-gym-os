@@ -12,6 +12,8 @@
         "laravel/nova": "^5.0",
         "laravel/pulse": "^1.4",
         "laravel/tinker": "^2.10.1",
+        "lucasdotvin/laravel-soulbscription": "^4.3",
+        "spatie/laravel-permission": "^6.21",
         "stancl/tenancy": "^3.9"
     },
     "require-dev": {

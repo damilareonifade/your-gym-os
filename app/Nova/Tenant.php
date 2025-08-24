@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\ResendTenantEmail;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields;
@@ -116,6 +117,8 @@ class Tenant extends Resource
      */
     public function actions(NovaRequest $request): array
     {
-        return [];
+        return [
+            new ResendTenantEmail,
+        ];
     }
 }
