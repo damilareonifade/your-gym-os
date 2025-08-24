@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword, HasName
+class Admin extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword, HasName, HasAppAuthentication
 {
 
     use HasUlids, Notifiable;
