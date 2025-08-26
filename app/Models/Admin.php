@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword, HasName, HasAppAuthentication
+class Admin extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword, HasName, HasAppAuthentication, MustVerifyEmail
 {
 
     use HasUlids, Notifiable;
