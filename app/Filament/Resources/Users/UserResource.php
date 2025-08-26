@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
+use UnitEnum;
 
 class UserResource extends Resource
 {
@@ -21,6 +23,20 @@ class UserResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::UserCircle;
 
     protected static ?string $recordTitleAttribute = 'first_name';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Members');
+    }
+
+    public static function getNavigationGroup(): string|UnitEnum|null
+    {
+        return __('Users');
+    }
+    public static function getNavigationIcon(): string|BackedEnum|Htmlable|null
+    {
+        return 'heroicon-o-user-group';
+    }
 
     public static function form(Schema $schema): Schema
     {
