@@ -18,6 +18,10 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+    'tenancy' => [
+        'tenant_domain' => env("APP_DOMAIN", "banka.ng"),
+    ],
+
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],

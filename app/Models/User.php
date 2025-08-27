@@ -3,14 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute as CastsAttribute;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUlids;
+    // use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +23,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        "last_name",
         'email',
         'password',
     ];
@@ -31,6 +37,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        "password_change",
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -44,5 +53,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function name()
+    {
+        return CastsAttribute::make(
+            get: fn($value, $attributes) => $attributes['first_name'] . ' ' . $attributes['last_name'],
+        );
     }
 }
