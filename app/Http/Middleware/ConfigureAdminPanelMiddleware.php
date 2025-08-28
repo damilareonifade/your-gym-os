@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Branding;
+use App\Models\Tenant\Branding;
 use Closure;
 use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentColor;
