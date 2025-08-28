@@ -7,6 +7,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
                 "admin@gymno.com",
             ]);
         });
+
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         /**
          * Configure default table settings for Filament tables
