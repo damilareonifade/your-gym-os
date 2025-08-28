@@ -9,12 +9,18 @@ class Branding extends Model
 {
     use HasUlids;
 
-    protected $fillable = [
-        'color',
-        'brand_logo',
-        'facebook_social_account',
-        'instagram_social_account',
-        'dark_mode_logo',
-        'favicon',
+    // protected $fillable = [
+    //     'color',
+    //     'brand_logo',
+    //     'facebook_social_account',
+    //     'instagram_social_account',
+    //     'dark_mode_logo',
+    //     'favicon',
+    // ];
+
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'colors' => 'array',
     ];
 }
