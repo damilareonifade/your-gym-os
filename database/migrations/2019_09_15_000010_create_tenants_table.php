@@ -23,7 +23,7 @@ class CreateTenantsTable extends Migration
             $table->string('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string("code")->nullable()->unique();
-            $table->string('status', )->default("active");
+            $table->string('status',)->default("active");
             $table->timestamps();
             $table->json('data')->nullable();
             $table->softDeletes();
