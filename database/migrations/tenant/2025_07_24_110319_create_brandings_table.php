@@ -14,8 +14,10 @@ return new class extends Migration {
             $table->ulid('id')->primary();
             $table->string('color')->nullable();
             $table->string('brand_logo')->nullable();
-            $table->string('facebook_social_account')->nullable(true);
-            $table->string('instagram_social_account')->nullable(true);
+            $table->string("dark_mode_logo")->nullable();
+            $table->string('favicon')->nullable();
+            $table->string('facebook_social_account')->nullable();
+            $table->string('instagram_social_account')->nullable();
             $table->timestamps();
         });
     }
