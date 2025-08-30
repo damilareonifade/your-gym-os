@@ -5,9 +5,11 @@ namespace App\Filament\Resources\Brandings\Schemas;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\TagsInput;
 
 class BrandingForm
 {
@@ -28,43 +30,19 @@ class BrandingForm
                     ])
                     ->required(),
 
-                // Accepted Languages multi-select
-                Select::make('accepted_languages')
+                Repeater::make('accepted_languages')
                     ->label('Accepted Languages')
-                    ->options([
-                        'en' => 'English',
-                        'fr' => 'Français',
-                        'es' => 'Español',
-                        'de' => 'Deutsch',
-                        'es-419' => 'Spanish (Latin America)',
+                    ->schema([
+                        Select::make('language_code')
+                            ->label('Language')
+                            ->searchable()
+                            ->options(self::getLanguageOptions())
+                            ->required()
                     ])
-                    ->multiple()
-                    ->required()
-                    ->columnSpanFull()
-                    ->dehydrateStateUsing(function ($state) {
-                        if (!$state) return null;
-
-                        $options = [
-                            'en' => 'English',
-                            'fr' => 'Français',
-                            'es' => 'Español',
-                            'de' => 'Deutsch',
-                            'es-419' => 'Spanish (Latin America)',
-                        ];
-
-                        return collect($state)->map(function ($code) use ($options) {
-                            return [
-                                'code' => $code,
-                                'name' => $options[$code] ?? $code,
-                            ];
-                        })->toArray();
-                    })
-                    ->saveRelationshipsUsing(function ($component, $state) {
-                        // Handle saving the transformed data to acceptedLanguages
-                        $component->getRecord()->update([
-                            'acceptedLanguages' => $state
-                        ]);
-                    }),
+                    ->addActionLabel('Add Language')
+                    ->minItems(1)
+                    ->maxItems(20)
+                    ->columnSpanFull(),
 
                 Repeater::make('colors')
                     ->label('Colors')
@@ -93,5 +71,37 @@ class BrandingForm
                 TextInput::make('instagram_social_account'),
             ])
             ->columns(1);
+    }
+
+
+
+    public static function getLanguageOptions(): array
+    {
+        return [
+            'en' => 'English',
+            'es' => 'Spanish (Spain)',
+            'fr' => 'French',
+            'de' => 'German',
+            'it' => 'Italian',
+            'pt' => 'Portuguese',
+            'ru' => 'Russian',
+            'ja' => 'Japanese',
+            'ko' => 'Korean',
+            'zh-CN' => 'Chinese (Simplified)',
+            'zh-TW' => 'Chinese (Traditional)',
+            'ar' => 'Arabic',
+            'hi' => 'Hindi',
+            'th' => 'Thai',
+            'vi' => 'Vietnamese',
+            'id' => 'Indonesian',
+            'ms' => 'Malay',
+            'tl' => 'Filipino',
+            'sw' => 'Swahili',
+            'am' => 'Amharic',
+            'yo' => 'Yoruba',
+            'ig' => 'Igbo',
+            'ha' => 'Hausa',
+
+        ];
     }
 }
