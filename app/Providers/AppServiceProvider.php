@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 "admin@gymno.com",
             ]);
         });
-
+        Passport::loadKeysFrom(storage_path());
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         /**
