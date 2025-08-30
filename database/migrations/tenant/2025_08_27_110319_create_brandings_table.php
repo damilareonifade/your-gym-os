@@ -14,6 +14,8 @@ return new class extends Migration {
             Schema::create('brandings', function (Blueprint $table) {
                 $table->ulid('id')->primary();
                 $table->json('colors')->nullable();
+                $table->string('default_language')->default('en');
+                $table->json('accepted_languages')->nullable();
                 $table->string('brand_logo')->nullable();
                 $table->string("dark_mode_logo")->nullable();
                 $table->string('favicon')->nullable();

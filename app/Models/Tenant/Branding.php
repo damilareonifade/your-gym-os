@@ -22,5 +22,6 @@ class Branding extends Model
 
     protected $casts = [
         'colors' => 'array',
+        'accepted_languages' => 'array',
     ];
 }
