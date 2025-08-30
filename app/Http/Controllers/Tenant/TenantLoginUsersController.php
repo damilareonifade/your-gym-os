@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tenant;
 use App\Models\Tenant\Branding;
+use Illuminate\Support\Facades\Response;
 use Laravel\Passport\ClientRepository;
 use Stancl\Tenancy\Tenancy;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TenantLoginUsersController extends Controller
 {
@@ -34,13 +36,13 @@ class TenantLoginUsersController extends Controller
             $user = Auth::user();
             $brand = Branding::first();
             $token = $user->createToken('user');
-            return response()->json([
-                'message' => 'Login successful',
+            $data = [
                 'user' => new UserResource($user),
                 "brand" => $brand,
                 'tenant_domain' => $tenant->domains->first()->domain ?? null,
-                'token' => $token,
-            ], 200);
+                'token' => $token
+            ];
+            return Response::v1(JsonResponse::HTTP_OK, "Login successful", $data);
         }
 
         // 5️⃣ Invalid credentials
